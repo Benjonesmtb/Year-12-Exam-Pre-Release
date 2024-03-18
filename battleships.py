@@ -1,7 +1,7 @@
 #1 Mark for including all classes given by the UML class diagram, with correct inheritance structure (ETO)
 #1 Mark if all class attributes are made private/public/protected as specified by the UML class diagram
 #1 Mark if all class methods are made private/public/protected as specified by the UML class diagram
-
+######
 from abc import ABCMeta, abstractmethod
 from random import randint
 
