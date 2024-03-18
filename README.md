@@ -14,86 +14,86 @@ You may use the Sinking Ships skeleton code to help you.
 
 ![alt text](https://github.com/Benjonesmtb/Year-12-Exam-Pre-Release/blob/main/Picture1.png?raw=true)
 
-# Board - Attribute/Method - Description
+# Board
+## Attribute/Method - Description
 
-columns
+### columns
 Specifies the number of columns on the game board.
 
-rows
+### rows
 Specifies the number of rows on the game board.
 
-board
+### board
 Keeps track of the ship locations and shot locations on the game board.
 
-playerName
+### playerName
 Specifies the number of the player that the board belongs to.
 
-Board()
+### Board()
 Creates a new Board object.
 
-display()
+### display()
 Displays the current state of the board, only showing ship locations if the player is looking at their own board.
 
-getWidth()
+### getWidth()
 Accessor for columns.
 
-getHeight()
+### getHeight()
 Accessor for rows.
 
-takeShot()
+### takeShot()
 Takes a shot at the given location on the board.
 
-placeShip()
-Asks the player to pick a location on the board and an orientation (vertical or horizontal) for a ship of a given length until a valid location and orientation are given that 
-will fit the ship on the board, and then adds the ship to the board as specified.
+### placeShip()
+Asks the player to pick a location on the board and an orientation (vertical or horizontal) for a ship of a given length until a valid location and orientation are given that will fit the ship on the board, and then adds the ship to the board as specified.
 
-checkWinner()
+### checkWinner()
 Checks whether all of the ships on the board have been sunk.
 
-# Player - Attribute/Method - Description
+# Player
+## Attribute/Method - Description
 
-playerNumber
+### playerNumber
 Specifies this players number.
 
-playerBoard
+### playerBoard
 Specifies this players board.
 
-Player()
+### Player()
 Creates a new Player object.
 
-getNumber()
+### getNumber()
 Accessor for playerNumber.
 
-getBoard()
+### getBoard()
 Accessor for playerBoard.
 
-HumanPlayer
-Attribute/Method
-Description
+# HumanPlayer
+## Attribute/Method - Description
 
-placeShips()
+### placeShips()
 Places all of this players ships onto their board, displaying messages to tell the player which ship they are placing and to confirm that they have successfully placed each ship.
 
-takeShot()
+### takeShot()
 Gets a valid location on a board and takes a shot at it, displaying a message and giving the player another chance to take a shot if they select an invalid target.
 
-getColumn()
+### getColumn()
 Gets a valid column on a board from player input, displaying a message and giving the player another chance to select a column if they select an invalid column.
 
-getRow()
+### getRow()
 Gets a valid row on a board from player input, displaying a message and giving the player another chance to select a row if they select an invalid row.
 
-# ComputerPlayer - Attribute/Method - Description
+# ComputerPlayer
+## Attribute/Method - Description
 
-placeShips()
-Places all of this players ships onto their board, displaying one message to say that the computer is placing its ships and another message to say that all of the computers 
-ships have been placed.
+### placeShips()
+Places all of this players ships onto their board, displaying one message to say that the computer is placing its ships and another message to say that all of the computers ships have been placed.
 
-takeShot()
+### takeShot()
 Gets a valid location on a board and takes a shot at it.
 
-getColumn()
+### getColumn()
 Gets a valid column on a board.
 
-getRow()
+### getRow()
 Gets a valid row on a board.
