@@ -1,8 +1,7 @@
 #1 Mark for including all classes given by the UML class diagram, with correct inheritance structure (ETO)
 #1 Mark if all class attributes are made private/public/protected as specified by the UML class diagram
 #1 Mark if all class methods are made private/public/protected as specified by the UML class diagram
-######
-from abc import ABCMeta, abstractmethod
+
 from random import randint
 
 class Board():
@@ -150,7 +149,7 @@ class Board():
                     return False
         return True
 
-class Player(metaclass=ABCMeta):
+class Player():
     #1 Mark for defining a constructor for the class Player with appropriate attributes
     def __init__(self, number, width, height):
         self._playerNumber = number
@@ -165,19 +164,19 @@ class Player(metaclass=ABCMeta):
         return self._playerBoard
     
     #1 Mark for defining appropriate abstract methods
-    @abstractmethod
+    #@abstractmethod
     def _placeShips(self):
         pass
     
-    @abstractmethod
+    #@abstractmethod
     def takeShot(self, board):
         pass
       
-    @abstractmethod
+    #@abstractmethod
     def _getColumn(self):
         pass
     
-    @abstractmethod
+    #@abstractmethod
     def _getRow(self):
         pass
     
