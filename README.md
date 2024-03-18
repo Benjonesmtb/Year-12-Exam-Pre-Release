@@ -12,6 +12,8 @@ Players cannot shoot tiles that they have already shot, and before the human pla
 Player input should be given as a number, to indicate the column of their chosen location, and a letter, to indicate the row (first row is A, second row is B, etc.). 
 You may use the Sinking Ships skeleton code to help you.
 
+![alt text](https://github.com/Benjonesmtb/Year-12-Exam-Pre-Release/blob/main/Picture1.png?raw=true)
+
 # Board - Attribute/Method - Description
 
 columns
