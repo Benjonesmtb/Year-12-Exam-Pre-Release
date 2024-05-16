@@ -139,7 +139,7 @@ class Board():
                 else:
                     print("You can only position your ship vertically down (v) or horizontally to the right(h)!")
             if player == "Human":       
-                print("You can't position the ship like that! Try again (The ship is " + size + "tiles long):")
+                print("You can't position the ship like that! Try again (The ship is " , size , "tiles long):") # REPLACING THE + WITH , IN THE PRINT STATEMENT FIXED THE CRASH WEHRE IS GOES OFF THE GRID
       
     #1 Mark for implementing the checkWinner method as described    
     def checkWinner(self):
