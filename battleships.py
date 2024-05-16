@@ -1,6 +1,11 @@
+#1 Mark for including all classes given by the UML class diagram, with correct inheritance structure (ETO)
+#1 Mark if all class attributes are made private/public/protected as specified by the UML class diagram
+#1 Mark if all class methods are made private/public/protected as specified by the UML class diagram
+from abc import ABCMeta, abstractmethod
 from random import randint
 
 class Board():
+    #1 Mark for defining a constructor for the class Board with appropriate attributes
     def __init__(self, width, height, number):
         self.__columns = width
         self.__rows = height
@@ -17,9 +22,11 @@ class Board():
         firstLine += "|"
         print(firstLine)
         
+        #1 Mark for displaying hits, misses, ships and unshot locations on the board (ETO)
         for r in range(self.__rows):
             print(str(chr(r+65)), end='')
             for x in self.__board[r]:
+                #1 Mark for hiding the locations of the opponent's ships (ETO)
                 if self.__playerNumber != number and x == "S":
                     y = "~"
                 else:
@@ -27,12 +34,14 @@ class Board():
                 print("| " + y + " ", end="")
             print("|")
 
+    #1 Mark for creating relevant accessor methods to access Board's private attributes
     def getWidth(self):
         return self.__columns
     
     def getHeight(self):
         return self.__rows
     
+    #1 Mark for implementing the takeShot method as described
     def takeShot(self, row, column):
         if self.__board[row][column] == "." or self.__board[row][column] == "X":
             return "Invalid"
@@ -43,49 +52,54 @@ class Board():
             self.__board[row][column] = "."
             return "Miss"
     
+    #1 Mark for overriding placeShip to work with either a human player or CPU player (ETO)
     def placeShip(self, size, number, player="CPU"):
+        #1 Mark for looping until valid input is given (ETO)
         while True:
             columnSet = False
             rowSet = False
             orientationSet = False
-
+            
             if player == "Human":
                 self.display(number)
-
+            
+            #1 Mark for getting a valid location on the board (ETO)
             while not columnSet:
                 if player == "Human":
                     try:
                         column = int(input("Enter the column where you would like to position the ship (1-" + str(self.__columns) + "):"))
                         print()
-                        if column >= 1 and column <= self.__columns:  # Check if the ship fits within the board horizontally
+                        if column >= 1 and column <= self.__columns:
                             column = column - 1
                             columnSet = True
                         else:
-                            print("That column doesn't exist or the ship doesn't fit. Please try again.")
+                            print("That column doesn't exist. Please try again.")
                     except:
                         print("That column doesn't exist. Please try again.")
                 else:
-                    column = randint(0, self.__columns - 1)  # Ensure the ship fits within the board horizontally
+                    column = randint(0, self.__columns -1)
                     columnSet = True
-
+                    
             while not rowSet:
                 if player == "Human":
                     try:
+                        #1 Mark for accepting letter input and converting into appropriate row (A is row 1/board[0], C is row 3/board[2] etc.) (ETO)
                         row = ord(input("Enter the row where you would like to position the ship (A-" + str(chr(self.__rows+65)) + "):").upper())
                         print()
-                        if row >= 65 and row <= self.__rows+65:  # Check if the ship fits within the board vertically
+                        if row >= 65 and row <= self.__rows+65:
                             row = row-65
                             rowSet = True
                         else:
-                            print("That row doesn't exist or the ship doesn't fit. Please try again.")
+                            print("That row doesn't exist. Please try again.")
                     except:
                         print("That row doesn't exist. Please try again.")
                 else:
-                    row = randint(0, self.__rows - 1)  # Ensure the ship fits within the board vertically
+                    row = randint(0, self.__rows -1)
                     rowSet = True
-
+            
             validPos = True
             
+            #1 Mark for getting the orientation of the ship (ETO)
             while not orientationSet:
                 if player == "Human":
                     orientation = input("Do you want to place your ship vertically down or horizontally to the right(v/h)?:")
@@ -98,35 +112,29 @@ class Board():
                         
                 if orientation.lower() == "v" or orientation.lower() == "vertical":
                     orientationSet = True
-                    if row + size > self.__rows:  # Check if the ship fits within the board vertically
-                        validPos = False
-                    else:
-                        try:
+                    try:
+                        for r in range(row, row + size):
+                            if self.__board[r][column] == "S":
+                                validPos = False
+                        if validPos == True:
                             for r in range(row, row + size):
-                                if self.__board[r][column] == "S":
-                                    validPos = False
-                            if validPos == True:
-                                for r in range(row, row + size):
-                                    self.__board[r][column] = "S"
-                                return
-                        except:
-                            pass
-
+                                self.__board[r][column] = "S"
+                            return
+                    except:
+                        pass
+                    
                 elif orientation.lower() == "h" or orientation.lower() == "horizontal":
                     orientationSet = True
-                    if column + size > self.__columns:  # Check if the ship fits within the board horizontally
-                        validPos = False
-                    else:
-                        try:
+                    try:
+                        for c in range(column, column + size):
+                            if self.__board[row][c] == "S":
+                                validPos = False
+                        if validPos == True:
                             for c in range(column, column + size):
-                                if self.__board[row][c] == "S":
-                                    validPos = False
-                            if validPos == True:
-                                for c in range(column, column + size):
-                                    self.__board[row][c] = "S"
-                                return
-                        except:
-                            pass
+                                self.__board[row][c] = "S"
+                            return
+                    except:
+                        pass
                     
                 else:
                     print("You can only position your ship vertically down (v) or horizontally to the right(h)!")
@@ -141,7 +149,7 @@ class Board():
                     return False
         return True
 
-class Player():
+class Player(metaclass=ABCMeta):
     #1 Mark for defining a constructor for the class Player with appropriate attributes
     def __init__(self, number, width, height):
         self._playerNumber = number
@@ -156,19 +164,19 @@ class Player():
         return self._playerBoard
     
     #1 Mark for defining appropriate abstract methods
-    #@abstractmethod
+    @abstractmethod
     def _placeShips(self):
         pass
     
-    #@abstractmethod
+    @abstractmethod
     def takeShot(self, board):
         pass
       
-    #@abstractmethod
+    @abstractmethod
     def _getColumn(self):
         pass
     
-    #@abstractmethod
+    @abstractmethod
     def _getRow(self):
         pass
     
