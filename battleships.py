@@ -271,28 +271,28 @@ class ComputerPlayer(Player):
 def main():
     widthSet = False
     heightSet = False
-    
+    # BOUNDS OF THE BOARD ADJUSTED, CANNOT EXCEED 26 AS THATS THE LENGTH OF THE ALPHABET
     while not widthSet:
         try:
-            width = int(input("Enter the width of your game board (10-26):"))
+            width = int(input("Enter the width of your game board (5-15):"))
             print()
-            if width >= 10 and width <= 26:
+            if width >= 5 and width <= 15:
                 widthSet = True
             else:
-                print("The width must be an integer from 10-26. Please try again.")
+                print("The width must be an integer from 5-15. Please try again.")
         except:
-            print("The width must be an integer from 10-26. Please try again.")
+            print("The width must be an integer from 5-15. Please try again.")
         
     while not heightSet:
         try:
-            height = int(input("Enter the height of your game board (10-26):"))
+            height = int(input("Enter the height of your game board (5-15):"))
             print()
-            if height >= 10 and height <= 26:
+            if height >= 5 and height <= 15:
                 heightSet = True
             else:
-                print("The height must be an integer from 10-26. Please try again.")
+                print("The height must be an integer from 5-15. Please try again.")
         except:
-            print("The height must be an integer from 10-26. Please try again.")
+            print("The height must be an integer from 5-15. Please try again.")
         
     player1 = HumanPlayer(1, width, height)
     player2 = ComputerPlayer(2, width, height)
