@@ -1,7 +1,6 @@
 #1 Mark for including all classes given by the UML class diagram, with correct inheritance structure (ETO)
 #1 Mark if all class attributes are made private/public/protected as specified by the UML class diagram
 #1 Mark if all class methods are made private/public/protected as specified by the UML class diagram
-from abc import ABCMeta, abstractmethod
 from random import randint
 
 class Board():
@@ -149,7 +148,7 @@ class Board():
                     return False
         return True
 
-class Player(metaclass=ABCMeta):
+class Player():
     #1 Mark for defining a constructor for the class Player with appropriate attributes
     def __init__(self, number, width, height):
         self._playerNumber = number
@@ -164,19 +163,15 @@ class Player(metaclass=ABCMeta):
         return self._playerBoard
     
     #1 Mark for defining appropriate abstract methods
-    @abstractmethod
     def _placeShips(self):
         pass
-    
-    @abstractmethod
+
     def takeShot(self, board):
         pass
-      
-    @abstractmethod
+
     def _getColumn(self):
         pass
-    
-    @abstractmethod
+
     def _getRow(self):
         pass
     
@@ -293,15 +288,15 @@ def main():
                 print("The height must be an integer from 5-15. Please try again.")
         except:
             print("The height must be an integer from 5-15. Please try again.")
-        
+    ############## MODIFIED TO ALLOW FOR HUMAN VS HUMAN GAMEPLAY ##############
     player1 = HumanPlayer(1, width, height)
-    player2 = ComputerPlayer(2, width, height)
+    player2 = HumanPlayer(2, width, height)
     board1 = player1.getBoard()
     board2 = player2.getBoard()
 	
     while True: 
         print()
-        print("It's your turn:")
+        print("It's your turn player 1:")
         
         makeShot = False
         
@@ -325,16 +320,48 @@ def main():
             board2.display(player1.getNumber())
             input("You have won!")
             return
-            
-        print()
-        print("It's the computer's turn:")
-        player2.takeShot(board1)
-        board1.display(player1.getNumber())
+
         if board1.checkWinner():
             print()
             board1.display(player1.getNumber())
             input("You have lost!")
             return
-    
+
+        #######################
+        #######################
+
+        print()
+        print("It's your turn player 2:")
+
+        makeShot = False
+
+        while not makeShot:
+            result = input(
+                "Would you like to take a shot(1), look at the computer's board(2), or look at your board(3)?:")
+            print()
+            if result == "1":
+                makeShot = True
+            elif result == "2":
+                board1.display(player2.getNumber())
+            elif result == "3":
+                board2.display(player2.getNumber())
+            else:
+                print("That is not a valid option!")
+
+        board1.display(player2.getNumber())
+        player2.takeShot(board1)
+
+        if board1.checkWinner():
+            print()
+            board1.display(player2.getNumber())
+            input("You have won!")
+            return
+
+        if board2.checkWinner():
+            print()
+            board2.display(player2.getNumber())
+            input("You have lost!")
+            return
+
 if __name__ == '__main__':
     main()
