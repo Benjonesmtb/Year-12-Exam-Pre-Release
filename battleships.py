@@ -1,12 +1,12 @@
 from random import randint
 
-class Board():
+
+class Board:
     def __init__(self, width, height, number):
         self.__columns = width
         self.__rows = height
         self.__board = [["~"]*self.__columns for i in range(self.__rows)]
         self.__playerNumber = number
-
 
     def display(self, number):
         firstLine = "-"
@@ -28,14 +28,11 @@ class Board():
                 print("| " + y + " ", end="")
             print("|")
 
-
     def getWidth(self):
         return self.__columns
 
-
     def getHeight(self):
         return self.__rows
-
 
     def takeShot(self, row, column):
         if self.__board[row][column] == "." or self.__board[row][column] == "X":
@@ -46,7 +43,6 @@ class Board():
         else:
             self.__board[row][column] = "."
             return "Miss"
-
 
     def placeShip(self, size, number, player="CPU"):
         while True:
@@ -70,13 +66,15 @@ class Board():
                     except:
                         print("That column doesn't exist. Please try again.")
                 else:
-                    column = randint(0, self.__columns -1)
+                    column = randint(0, self.__columns - 1)
                     columnSet = True
                     
             while not rowSet:
                 if player == "Human":
                     try:
-                        row = ord(input("Enter the row where you would like to position the ship (A-" + str(chr(self.__rows+65)) + "):").upper())
+                        extra = str(chr(self.__rows+65))
+                        row = input("Enter the row where you would like to position the ship (A-" + extra + "):")
+                        row = ord(row.upper())
                         print()
                         if row >= 65 and row <= self.__rows+65:
                             row = row-65
@@ -132,7 +130,6 @@ class Board():
             if player == "Human":       
                 print("You can't position the ship like that! Try again (The ship is " , size , "tiles long):") # REPLACING THE + WITH , IN THE PRINT STATEMENT FIXED THE CRASH WHEN IT GOES OFF THE GRID
 
-
     def checkWinner(self):
         for r in range(self.__rows):
             for c in range(self.__columns):
@@ -141,32 +138,26 @@ class Board():
         return True
 
 
-class Player():
+class Player:
     def __init__(self, number, width, height):
         self._playerNumber = number
         self._playerBoard = Board(width, height, number)
         self._placeShips()
 
-
     def getNumber(self):
         return self._playerNumber
-
 
     def getBoard(self):
         return self._playerBoard
 
-
     def _placeShips(self):
         pass
-
 
     def takeShot(self, board):
         pass
 
-
     def _getColumn(self):
         pass
-
 
     def _getRow(self):
         pass
@@ -191,7 +182,6 @@ class HumanPlayer(Player):
         print("Your destroyer is in position!")
         print()
 
-
     def takeShot(self, board):
         shotMade = False
         while not shotMade:
@@ -204,7 +194,6 @@ class HumanPlayer(Player):
                 shotMade = True
                 print(result)
 
-
     def _getColumn(self, board):
         while True:
             try:
@@ -215,7 +204,6 @@ class HumanPlayer(Player):
                     print("That column doesn't exist. Please try again.")
             except:
                 print("That column doesn't exist. Please try again.")
-
 
     def _getRow(self, board):
         while True:
@@ -240,7 +228,6 @@ class ComputerPlayer(Player):
         self._playerBoard.placeShip(2, self._playerNumber)
         print("The computer has positioned its ships!")
 
-
     def takeShot(self, board):
         shotMade = False
         while not shotMade:
@@ -249,16 +236,13 @@ class ComputerPlayer(Player):
             result = board.takeShot(row, column)
             if result != "Invalid":
                 shotMade = True
-                print(result) 
-
+                print(result)
 
     def _getColumn(self, board):
         return randint(0, board.getWidth()-1)
 
-
     def _getRow(self, board):
         return randint(0, board.getHeight()-1)
-
 
 def main():
     widthSet = False
@@ -285,12 +269,12 @@ def main():
                 print("The height must be an integer from 5-15. Please try again.")
         except:
             print("The height must be an integer from 5-15. Please try again.")
-    ############## MODIFIED TO ALLOW FOR HUMAN VS HUMAN GAMEPLAY ##############
+# MODIFIED TO ALLOW FOR HUMAN VS HUMAN GAMEPLAY #
     player1 = HumanPlayer(1, width, height)
     player2 = HumanPlayer(2, width, height)
     board1 = player1.getBoard()
     board2 = player2.getBoard()
-	
+
     while True: 
         print()
         print("It's your turn player 1:")
