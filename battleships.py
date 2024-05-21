@@ -56,7 +56,8 @@ class Board:
             while not columnSet:
                 if player == "Human":
                     try:
-                        column = int(input("Enter the column where you would like to position the ship (1-" + str(self.__columns) + "):"))
+                        column = int(input("Enter the column where you would "
+                                           "like to position the ship (1-" + str(self.__columns) + "):"))
                         print()
                         if column >= 1 and column <= self.__columns:
                             column = column - 1
@@ -91,7 +92,8 @@ class Board:
 
             while not orientationSet:
                 if player == "Human":
-                    orientation = input("Do you want to place your ship vertically down or horizontally to the right(v/h)?:")
+                    orientation = input("Do you want to place your ship "
+                                        "vertically down or horizontally to the right(v/h)?:")
                     print()
                 else:
                     if randint(0,1) == 0:
@@ -127,8 +129,9 @@ class Board:
                     
                 else:
                     print("You can only position your ship vertically down (v) or horizontally to the right(h)!")
-            if player == "Human":       
-                print("You can't position the ship like that! Try again (The ship is " , size , "tiles long):") # REPLACING THE + WITH , IN THE PRINT STATEMENT FIXED THE CRASH WHEN IT GOES OFF THE GRID
+            if player == "Human":
+                # REPLACING THE + WITH , IN THE PRINT STATEMENT FIXED THE CRASH WHEN IT GOES OFF THE GRID
+                print("You can't position the ship like that! Try again (The ship is " , size , "tiles long):")
 
     def checkWinner(self):
         for r in range(self.__rows):
@@ -196,7 +199,8 @@ class HumanPlayer(Player):
     def _getRow(self, board):
         while True:
             try:
-                row = ord(input("Enter the row you would like to target (A-" + str(chr(board.getHeight()+64)) + "):").upper())
+                row = ord(input("Enter the row you would like to "
+                                "target (A-" + str(chr(board.getHeight()+64)) + "):").upper())
                 print()
                 if row >= 65 and row < board.getHeight() + 65:
                     return row - 65
@@ -270,7 +274,8 @@ def main():
         makeShot = False
         
         while not makeShot:
-            result = input("Would you like to take a shot(1), look at the computer's board(2), or look at your board(3)?:")
+            result = input("Would you like to take a shot(1), look at the computer's board(2), "
+                           "or look at your board(3)?:")
             print()
             if result == "1":
                 makeShot = True
