@@ -150,18 +150,6 @@ class Player:
     def getBoard(self):
         return self._playerBoard
 
-    def _placeShips(self):
-        pass
-
-    def takeShot(self, board):
-        pass
-
-    def _getColumn(self):
-        pass
-
-    def _getRow(self):
-        pass
-
 
 class HumanPlayer(Player):
     def _placeShips(self):
@@ -344,6 +332,4 @@ def main():
             input("You have lost!")
             return
 
-
-if __name__ == '__main__':
-    main()
+main()
